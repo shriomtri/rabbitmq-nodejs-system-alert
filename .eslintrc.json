@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "logger": "writable",
+    "isDev": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "strict": "warn",
+    "no-console": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "arrow-parens": "off"
+  }
+}

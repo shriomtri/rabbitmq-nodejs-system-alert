@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const env = process.env.NODE_ENV || 'dev';
+console.log(`env : ${env}`)
+global.env = env;
+global.services = require(`../environments/${env}.dev`)
+const http = require('http');
+const config = require('./config')[env]
+
+const { app, initServer } = require('../app');
+
+
+(async function (){
+  try {
+    console.log('starting server ... ')
+    initServer();
+    app.set('port', config.server.port);
+    app.set('hostname', config.server.hostName);
+
+    await require('../modules/messaging').initMQ()
+
+    const server = http.createServer(app);
+    server.on('error', (err) => {
+      console.log(`error start server ${err}`)
+    });
+    server.on('listening', () => {
+      console.log(`listening on ${config.server.hostName}:${config.server.port}`)
+    });
+    server.listen(app.get('port'), app.get('hostname'));
+
+  }catch(err) {
+    console.log('server can not be started.');
+    console.log(err);
+  }
+})()

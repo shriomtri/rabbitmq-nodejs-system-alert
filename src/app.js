@@ -1,6 +1,5 @@
 const createError = require('http-errors');
 const express = require('express');
-const ddos = require('ddos');
 const cookieParser = require('cookie-parser');
 
 const app  = express();
@@ -23,10 +22,7 @@ function initServer() {
       next();
     }
   });
-
-  const ddosDetector = new ddos({burst:2, limit:2})
-
-  app.use(ddosDetector.express);
+  
   app.use(express.json({ limit: '115MB' }));
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());

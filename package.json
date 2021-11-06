@@ -13,7 +13,6 @@
     "amqplib": "^0.8.0",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.3",
-    "ddos": "^0.2.1",
     "express": "^4.17.1",
     "http-errors": "^1.8.0"
   },
